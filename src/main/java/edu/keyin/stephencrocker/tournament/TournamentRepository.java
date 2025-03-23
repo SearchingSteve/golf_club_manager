@@ -1,9 +1,5 @@
 package edu.keyin.stephencrocker.tournament;
 
-
-
-import edu.keyin.stephencrocker.tournament.Tournament;
-
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
