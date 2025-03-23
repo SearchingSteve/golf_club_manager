@@ -21,6 +21,4 @@ public interface TournamentRepository extends CrudRepository<Tournament, Long> {
     // Search by date range
     List<Tournament> findByStartDateBetween(LocalDate startDate, LocalDate endDate);
 
-    // If you decide to add a name field to Tournament entity
-    List<Tournament> findByNameContainingIgnoreCase(String name);
 }
