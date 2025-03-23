@@ -2,10 +2,12 @@ package edu.keyin.stephencrocker.tournament;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import edu.keyin.stephencrocker.member.Member;
 
 import java.util.List;
 import java.util.Optional;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 @Service
 public class TournamentService {
@@ -62,5 +64,10 @@ public class TournamentService {
         }
 
         return null;
+    }
+
+    public List<Member> findMembersInTournament(long tournamentId) {
+        Tournament tournament = findTournamentById(tournamentId);
+        return tournament != null ? tournament.getParticipatingMembers() : new ArrayList<>();
     }
 }

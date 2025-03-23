@@ -1,9 +1,10 @@
 package edu.keyin.stephencrocker.tournament;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import edu.keyin.stephencrocker.member.Member;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -19,9 +20,24 @@ public class TournamentController {
     }
 
     // Get tournament by id
-    @GetMapping("tournaments{id}")
+    @GetMapping("/tournaments/{id}")
     public Tournament getTournamentById(@PathVariable Long id) {
         return tournamentService.findTournamentById(id);
+    }
+
+    // Search tournaments
+    @GetMapping("/tournaments/search")
+    public List<Tournament> searchTournaments(
+            @RequestParam(required = false) LocalDate startDate,
+            @RequestParam(required = false) String location,
+            @RequestParam(required = false) LocalDate endDate) {
+        return tournamentService.searchTournaments(startDate, location, endDate);
+    }
+
+    // Get all members in a tournament
+    @GetMapping("/tournaments/{id}/members")
+    public List<Member> getTournamentMembers(@PathVariable Long id) {
+        return tournamentService.findMembersInTournament(id);
     }
 
     // Create new tournament
@@ -31,7 +47,7 @@ public class TournamentController {
     }
 
     // Update tournament
-    @PutMapping("tournament{id}")
+    @PutMapping("/tournament/{id}")
     public Tournament updateTournament(@PathVariable Long id, @RequestBody Tournament tournament) {
         return tournamentService.updateTournament(id, tournament);
     }

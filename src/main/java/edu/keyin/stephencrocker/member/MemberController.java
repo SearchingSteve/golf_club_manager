@@ -2,8 +2,7 @@ package edu.keyin.stephencrocker.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -19,21 +18,19 @@ public class MemberController {
     }
 
     // Get member by id
-    @GetMapping("members{id}")
+    @GetMapping("/members/{id}")
     public Member getMemberById(@PathVariable Long id) {
         return memberService.findMemberById(id);
     }
 
-    // Get member/s by name
-    @GetMapping("/member_search")
-    public List<Member> getMemberByName(@RequestParam(value = "name", required = false) String name) {
-        List<Member> results = new ArrayList<Member>();
-        Member member = memberService.findByName(name);
-
-        if (member != null) {
-            results.add(member);
-        }
-        return results;
+    // Search members
+    @GetMapping("/members/search")
+    public List<Member> searchMembers(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) String phoneNumber,
+            @RequestParam(required = false) LocalDate membershipStartDate) {
+        return memberService.searchMembers(name, email, phoneNumber);
     }
 
     // Create new member
@@ -43,7 +40,7 @@ public class MemberController {
     }
 
     // Update member
-    @PutMapping("member{id}")
+    @PutMapping("/member/{id}")
     public Member updateMember(@PathVariable Long id, @RequestBody Member member) {
         return memberService.updateMember(id, member);
     }

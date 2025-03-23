@@ -7,7 +7,7 @@ import java.time.LocalDate;
 @Entity
 public class Member {
     @Id
-    @SequenceGenerator(name = "member_sequence", sequenceName = "member_sequence", allocationSize = 1, initialValue=1)
+    @SequenceGenerator(name = "member_sequence", sequenceName = "member_sequence", allocationSize = 1, initialValue = 1)
     @GeneratedValue(generator = "member_sequence")
     private long id;
     private String memberName;
@@ -15,6 +15,7 @@ public class Member {
     private String memberEmail;
     private String memberPhone;
     private LocalDate memberBirth;
+    private LocalDate membershipStartDate;
     private int membershipDuration;
 
     public long getId() {
@@ -63,6 +64,14 @@ public class Member {
 
     public void setMemberBirth(LocalDate memberBirth) {
         this.memberBirth = memberBirth;
+    }
+
+    public LocalDate getMembershipStartDate() {
+        return membershipStartDate;
+    }
+
+    public void setMembershipStartDate(LocalDate membershipStartDate) {
+        this.membershipStartDate = membershipStartDate;
     }
 
     public int getMembershipDuration() {
