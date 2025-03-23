@@ -26,11 +26,11 @@ public class MemberService {
     }
 
     public Member findByEmail(String email) {
-        return memberRepository.findByEmail(email);
+        return memberRepository.findByMemberEmail(email);
     }
 
     public Member findByPhoneNumber(String phoneNumber) {
-        return memberRepository.findByPhoneNumberContaining(phoneNumber);
+        return memberRepository.findByMemberPhoneContaining(phoneNumber);
     }
 
     public List<Member> searchMembers(String name, String email, String phoneNumber) {
