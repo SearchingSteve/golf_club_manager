@@ -52,7 +52,11 @@ CREATE DATABASE golf_club;
 4. Build the application:
 
 ```bash
+# If using Maven wrapper
 ./mvnw clean package
+
+# If using installed Maven
+mvn clean package
 ```
 
 5. Run the application:
@@ -97,7 +101,6 @@ spring.datasource.password=your_password
 3. Test GET operations to verify the created data
 4. Test search operations
 5. Test update operations
-
 
 ## Troubleshooting
 
