@@ -1,0 +1,235 @@
+{
+	"info": {
+		"_postman_id": "golf-club-management",
+		"name": "Golf Club Management API",
+		"description": "Collection for testing Golf Club Management System API endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Members",
+			"item": [
+				{
+					"name": "Create Member",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"memberName\": \"John Doe\",\n    \"memberAddress\": \"123 Golf Street, Golf City\",\n    \"memberEmail\": \"john.doe@email.com\",\n    \"memberPhone\": \"555-0123\",\n    \"memberBirth\": \"1990-01-01\",\n    \"membershipStartDate\": \"2024-01-01\",\n    \"membershipDuration\": 12\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/member",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["member"]
+						}
+					}
+				},
+				{
+					"name": "Get All Members",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8080/members",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["members"]
+						}
+					}
+				},
+				{
+					"name": "Get Member by ID",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8080/members/1",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["members", "1"]
+						}
+					}
+				},
+				{
+					"name": "Search Members",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8080/members/search?name=John&email=john.doe@email.com&phoneNumber=555-0123&membershipStartDate=2024-01-01",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["members", "search"],
+							"query": [
+								{
+									"key": "name",
+									"value": "John"
+								},
+								{
+									"key": "email",
+									"value": "john.doe@email.com"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "555-0123"
+								},
+								{
+									"key": "membershipStartDate",
+									"value": "2024-01-01"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Update Member",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"memberName\": \"John Doe Updated\",\n    \"memberAddress\": \"456 Golf Street, Golf City\",\n    \"memberEmail\": \"john.doe.updated@email.com\",\n    \"memberPhone\": \"555-0124\",\n    \"memberBirth\": \"1990-01-01\",\n    \"membershipStartDate\": \"2024-01-01\",\n    \"membershipDuration\": 24\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/member/1",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["member", "1"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Tournaments",
+			"item": [
+				{
+					"name": "Create Tournament",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"startDate\": \"2024-06-01\",\n    \"endDate\": \"2024-06-03\",\n    \"location\": \"Pine Valley Golf Club\",\n    \"entryFee\": 150.00,\n    \"cashPrizeAmount\": 1000.00\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/tournament",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["tournament"]
+						}
+					}
+				},
+				{
+					"name": "Get All Tournaments",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8080/tournaments",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["tournaments"]
+						}
+					}
+				},
+				{
+					"name": "Get Tournament by ID",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8080/tournaments/1",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["tournaments", "1"]
+						}
+					}
+				},
+				{
+					"name": "Search Tournaments",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8080/tournaments/search?startDate=2024-06-01&location=Pine Valley&endDate=2024-06-03",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["tournaments", "search"],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "2024-06-01"
+								},
+								{
+									"key": "location",
+									"value": "Pine Valley"
+								},
+								{
+									"key": "endDate",
+									"value": "2024-06-03"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Get Members in Tournament",
+					"request": {
+						"method": "GET",
+						"url": {
+							"raw": "http://localhost:8080/tournaments/1/members",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["tournaments", "1", "members"]
+						}
+					}
+				},
+				{
+					"name": "Update Tournament",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"startDate\": \"2024-06-01\",\n    \"endDate\": \"2024-06-03\",\n    \"location\": \"Pine Valley Golf Club Updated\",\n    \"entryFee\": 175.00,\n    \"cashPrizeAmount\": 1500.00\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/tournament/1",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8080",
+							"path": ["tournament", "1"]
+						}
+					}
+				}
+			]
+		}
+	]
+} 
