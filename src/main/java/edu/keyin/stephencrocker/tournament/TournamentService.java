@@ -3,6 +3,7 @@ package edu.keyin.stephencrocker.tournament;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import edu.keyin.stephencrocker.member.Member;
+import edu.keyin.stephencrocker.member.MemberRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,6 +14,9 @@ import java.util.ArrayList;
 public class TournamentService {
     @Autowired
     private TournamentRepository tournamentRepository;
+
+    @Autowired
+    private MemberRepository memberRepository;
 
     public List<Tournament> findAllTournaments() {
         return (List<Tournament>) tournamentRepository.findAll();
@@ -60,6 +64,20 @@ public class TournamentService {
             tournamentToUpdate.setLocation(updatedTournament.getLocation());
             tournamentToUpdate.setEntryFee(updatedTournament.getEntryFee());
             tournamentToUpdate.setCashPrize(updatedTournament.getCashPrize());
+
+            if (updatedTournament.getParticipatingMembers() != null) {
+                List<Member> members = new ArrayList<>();
+                for (Member member : updatedTournament.getParticipatingMembers()) {
+                    if (member.getId() > 0) {
+                        Optional<Member> existingMember = memberRepository.findById(member.getId());
+                        if (existingMember.isPresent()) {
+                            members.add(existingMember.get());
+                        }
+                    }
+                }
+                tournamentToUpdate.setParticipatingMembers(members);
+            }
+
             return tournamentRepository.save(tournamentToUpdate);
         }
 
@@ -69,5 +87,23 @@ public class TournamentService {
     public List<Member> findMembersInTournament(long tournamentId) {
         Tournament tournament = findTournamentById(tournamentId);
         return tournament != null ? tournament.getParticipatingMembers() : new ArrayList<>();
+    }
+
+    public Tournament addMembersToTournament(long tournamentId, List<Long> memberIds) {
+        Tournament tournament = findTournamentById(tournamentId);
+        if (tournament == null) {
+            return null;
+        }
+
+        List<Member> members = new ArrayList<>();
+        for (Long memberId : memberIds) {
+            Optional<Member> member = memberRepository.findById(memberId);
+            if (member.isPresent()) {
+                members.add(member.get());
+            }
+        }
+
+        tournament.setParticipatingMembers(members);
+        return tournamentRepository.save(tournament);
     }
 }

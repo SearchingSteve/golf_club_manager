@@ -51,4 +51,10 @@ public class TournamentController {
     public Tournament updateTournament(@PathVariable Long id, @RequestBody Tournament tournament) {
         return tournamentService.updateTournament(id, tournament);
     }
+
+    // Add members to tournament by their IDs
+    @PostMapping("/tournament/{id}/members")
+    public Tournament addMembersToTournament(@PathVariable Long id, @RequestBody List<Long> memberIds) {
+        return tournamentService.addMembersToTournament(id, memberIds);
+    }
 }
