@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.ArrayList;
 import edu.keyin.stephencrocker.member.Member;
 
 @Entity
@@ -17,8 +18,9 @@ public class Tournament {
     private String location;
     private double entryFee;
     private double cashPrize;
-    @ManyToMany
-    private List<Member> participatingMembers;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "tournament_members", joinColumns = @JoinColumn(name = "tournament_id"), inverseJoinColumns = @JoinColumn(name = "member_id"))
+    private List<Member> participatingMembers = new ArrayList<>();
 
     public long getId() {
         return id;

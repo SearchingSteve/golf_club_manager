@@ -95,15 +95,19 @@ public class TournamentService {
             return null;
         }
 
-        List<Member> members = new ArrayList<>();
+        List<Member> currentMembers = tournament.getParticipatingMembers();
+        if (currentMembers == null) {
+            currentMembers = new ArrayList<>();
+        }
+
         for (Long memberId : memberIds) {
             Optional<Member> member = memberRepository.findById(memberId);
-            if (member.isPresent()) {
-                members.add(member.get());
+            if (member.isPresent() && !currentMembers.contains(member.get())) {
+                currentMembers.add(member.get());
             }
         }
 
-        tournament.setParticipatingMembers(members);
+        tournament.setParticipatingMembers(currentMembers);
         return tournamentRepository.save(tournament);
     }
 }

@@ -41,19 +41,19 @@ public class TournamentController {
     }
 
     // Create new tournament
-    @PostMapping("/tournament")
+    @PostMapping("/tournaments")
     public Tournament createTournament(@RequestBody Tournament newTournament) {
         return tournamentService.createTournament(newTournament);
     }
 
     // Update tournament
-    @PutMapping("/tournament/{id}")
+    @PutMapping("/tournaments/{id}")
     public Tournament updateTournament(@PathVariable Long id, @RequestBody Tournament tournament) {
         return tournamentService.updateTournament(id, tournament);
     }
 
     // Add members to tournament by their IDs
-    @PostMapping("/tournament/{id}/members")
+    @PostMapping("/tournaments/{id}/members")
     public Tournament addMembersToTournament(@PathVariable Long id, @RequestBody List<Long> memberIds) {
         return tournamentService.addMembersToTournament(id, memberIds);
     }
