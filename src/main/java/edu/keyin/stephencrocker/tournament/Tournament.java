@@ -2,7 +2,6 @@ package edu.keyin.stephencrocker.tournament;
 
 import jakarta.persistence.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import edu.keyin.stephencrocker.member.Member;
@@ -10,14 +9,14 @@ import edu.keyin.stephencrocker.member.Member;
 @Entity
 public class Tournament {
     @Id
-    @SequenceGenerator(name = "tournament_sequence", sequenceName = "tournament_sequence", allocationSize = 1, initialValue=1)
+    @SequenceGenerator(name = "tournament_sequence", sequenceName = "tournament_sequence", allocationSize = 1, initialValue = 1)
     @GeneratedValue(generator = "tournament_sequence")
     private long id;
     private LocalDate startDate;
     private LocalDate endDate;
     private String location;
-    private BigDecimal entryFee;
-    private BigDecimal cashPrize;
+    private double entryFee;
+    private double cashPrize;
     @ManyToMany
     private List<Member> participatingMembers;
 
@@ -53,19 +52,19 @@ public class Tournament {
         this.location = location;
     }
 
-    public BigDecimal getEntryFee() {
+    public double getEntryFee() {
         return entryFee;
     }
 
-    public void setEntryFee(BigDecimal entryFee) {
+    public void setEntryFee(double entryFee) {
         this.entryFee = entryFee;
     }
 
-    public BigDecimal getCashPrize() {
+    public double getCashPrize() {
         return cashPrize;
     }
 
-    public void setCashPrize(BigDecimal cashPrize) {
+    public void setCashPrize(double cashPrize) {
         this.cashPrize = cashPrize;
     }
 
